@@ -1,0 +1,310 @@
+<html>
+    <head>
+    	<title>Switch Product Customizer</title>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+
+        <style>
+
+	        #view {
+	        	background: url('images/front-switch.png') no-repeat;
+	        	width: 300px;
+	        	height: 281px;
+	        }
+	        .black-palette {
+	        	background-color: #000000;
+	        	width: 25px;
+	        	height: 25px;
+	        }
+	        .row {
+	        	margin: 20px 0px 0px 0px;
+	        }
+
+	        #total {
+	        	font-size: 26px;
+	        }
+
+	        #text {
+	        	width: 100px;
+	        	position: absolute;
+			    margin-top: 150px;
+			    margin-left: 95px;
+			    color: #ffffff;
+			    font-size: 22px;
+	        }
+
+
+        </style>
+    </head>
+    <body>
+    	<div class="container">
+
+	    	<div class="row">
+	    		<div class="col-md-4 col-md-offset-1">
+	    			<div id="view" class="center-block">
+	    				<div id="text"></div>
+	    			</div>
+	    		</div>
+	    		<div class="col-md-4">
+
+	    			<!-- Color Options -->
+	    			<div class="row">
+	    				<div class="col-md-5">
+	    					<strong>Switch Color:</strong>
+	    				</div>
+	    				<div class="col-md-7">
+	    					<div class="black-palette"></div>
+	    				</div>
+	    			</div>
+
+
+	    			<!-- Orientation Options -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Orientation:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<span>[Vertical]</span>
+	    					<span>[Horizontal]</span>
+	    				</div>
+	    			</div>
+
+
+	    			<!-- Symbol Options -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Symbol:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<span>SELECT Symbol</span>
+	    				</div>
+	    			</div>
+
+
+	    			<!-- Text Line -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Text Line:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<textarea class="form-control" name="text"></textarea>
+	    				</div>
+	    			</div>
+
+
+	    			<!-- Choose Font Type -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Font Type:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<div id="font-type-slider"></div>
+	    					<span id="type-display"></span>
+	    				</div>
+	    			</div>
+
+
+
+	    			<!-- Choose Rocker Style -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Rocker Style:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<select class="form-control" name="rockerStyle">
+	    						<option value="0" selected="selected">None - $12.99</option>
+	    						<option value="1">On/Off | 5 Pin Switch - $19.99</option>
+	    						<option value="2">(On)/Off | Momentary - $19.99</option>
+	    						<option value="3">On/On/Off | 6 Pin Switch - $22.99</option>
+	    						<option value="4">On/Off | 7 Pin Switch - $22.99</option>
+	    						<option value="5">(On)/Off/(On) | Momentary - $22.99</option>
+	    					</select>
+	    				</div>
+	    			</div>
+
+
+	    			<!-- Background Light Color -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Light Color:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<span>(Not available)</span>
+	    				</div>
+	    			</div>
+
+
+
+	    			<!-- Quantity -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Quantity:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<input type="number" value="1" name="quantity" size="5" class="form-control">
+	    				</div>
+	    			</div>
+
+
+
+	    			<!-- Notes -->
+	    			<div class="row">
+	    				<div class="col-md-3">
+	    					<strong>Notes:</strong>
+	    				</div>
+	    				<div class="col-md-9">
+	    					<textarea name="notes" class="form-control"></textarea>
+	    				</div>
+	    			</div>
+
+
+
+	    			<!-- Total -->
+	    			<div class="row">
+	    				<div class="col-md-12">
+	    					<span class="pull-right">Total: <span id="total">$0.00</span></span>
+	    				</div>
+	    			</div>
+
+
+
+	    			<!-- Buy Now -->
+	    			<div class="row">
+	    				<div class="col-md-12">
+	    					<span class="pull-right btn btn-success">BUY NOW</span>
+	    				</div>
+	    			</div>
+	    			
+
+	    		</div>
+	    	</div>
+
+    	</div>
+    	
+
+
+        <script type="text/javascript">
+        	$(function() {
+
+        		"use strict";
+
+        		function addGoogleFont(FontName) { 
+			       // http://fonts.googleapis.com/css?family=Tangerine
+					$("head").append("<link href='http://fonts.googleapis.com/css?family=" + FontName + "' rel='stylesheet' type='text/css'>");
+			    }
+
+			    var total = 12.99;
+			    var totalIndex = 0;
+			    var pricingSheet = [12.99, 19.99, 19.99, 22.99, 22.99, 22.99];
+
+			    /*
+			    * Changes
+			    * @params 
+			    */
+			    function priceChange(index, quantity) {
+
+
+			    	// If undefined.
+			    	quantity = (typeof(quantity) === 'undefined' || quantity == "") ? 1 : quantity;
+
+			    	total = pricingSheet[index] * quantity;
+			    	
+			    	// Insert total.
+			    	$("#total").html("$" + total.toFixed(2));
+
+
+			    }
+
+			    $(window).on("load", function() {
+			    	// Load start price on page load.
+			    	priceChange(0);
+			    });
+
+
+			    $("[name='text']").on("input", function() {
+			    	$("#text").html(this.value);
+			    });
+
+
+			    $("[name='quantity']").on("input", function() {
+			    	priceChange(totalIndex, this.value);
+			    });
+
+
+			    $("[name='rockerStyle']").on("change", function() {
+			    	totalIndex = this.value;
+			    	priceChange(this.value);
+			    });
+
+
+
+
+		      $.getJSON("https://crossorigin.me/http://lasvegaswebdesign.co/test/font/meta.json", function (data) {
+
+		        var fontFile = [];
+		        var fileName;
+
+		        $.each(data.items, function (key, value) {
+
+		          var file = value.family.replace(" ", "").toLowerCase();
+		          fontFile.push(file);
+
+		        });
+
+
+
+		        $("#font-type-slider").slider({
+		          min: 0,
+		          max: fontFile.length,
+		          slide : function(event, ui) {
+
+		            let fontName = fontFile[ui.value];
+
+
+		            if(fontName != null || fontName !='') {
+
+		              $.getJSON("https://crossorigin.me/http://lasvegaswebdesign.co/test/font/ofl/"+fontName+"/METADATA.json", function (data) {
+		                
+
+		                $.each(data.fonts, function (key, value) {
+
+		                  //fileName = "http://gdiexpress.com/ofl/"+fontName+"/" + value.filename;
+
+		                  addGoogleFont(value.name); // for example
+
+		                  $('#text').css("font-family", value.name);
+
+
+		                	$("#type-display").html(value.name);
+
+		                });
+
+
+		              });
+
+		            } else {
+
+		              message = "Couldn't load font.";
+
+		              // Insert
+		              $("#type-display").html(message);
+
+		            }
+		     
+
+		          }
+
+		         });
+
+		      });
+
+        	});
+        </script>
+    </body>
+</html>
