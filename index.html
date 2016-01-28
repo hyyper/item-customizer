@@ -13,7 +13,7 @@
         <style>
 
 	        #view {
-	        	background: url('images/front-switch.png') no-repeat;
+	        	background: url('images/front-switch-vertical.png') no-repeat;
 	        	width: 300px;
 	        	height: 281px;
 	        }
@@ -33,10 +33,59 @@
 	        #text {
 	        	width: 100px;
 	        	position: absolute;
-			    margin-top: 150px;
-			    margin-left: 95px;
+			    top: 150px;
+			    left: 143px;
 			    color: #ffffff;
 			    font-size: 22px;
+			    word-break: break-all;
+			    -ms-word-break: break-all;
+	        }
+
+	        #symbol {
+	        	width: 90px;
+	        	height: 90px;
+	        	position: absolute;
+	        	left: 145px;
+	        	top: 50px;
+	        }
+
+	        [data-direction], [data-symbol] {
+	        	cursor: pointer;
+	        }
+
+	        /*
+	        * Symbols
+	        */
+
+	        #symbol-selection {
+	        	background-color: #000000;
+	        	padding: 50px;
+	        	width: 270px;
+	        	position: absolute;
+	        	z-index: 99999;
+	        	border-radius: 10px;
+	        	display: none;
+	        	overflow-y: scroll;
+	        }
+
+	        li > h4 {
+	        	color: #ffffff;
+	        }
+
+	        #symbol-selection > ul {
+	        	padding: 0px;
+	        	margin: 0px;
+	        	list-style: none;
+	        }
+
+	        #symbol-selection > ul > li {
+	        	float: left;
+	        	padding: 7px;
+	        }
+
+	        .symbol {
+	        	width: 50px;
+	        	height: 50px;
 	        }
 
 
@@ -48,7 +97,11 @@
 	    	<div class="row">
 	    		<div class="col-md-4 col-md-offset-1">
 	    			<div id="view" class="center-block">
+
 	    				<div id="text"></div>
+
+	    				<img id="symbol">
+
 	    			</div>
 	    		</div>
 	    		<div class="col-md-4">
@@ -70,8 +123,8 @@
 	    					<strong>Orientation:</strong>
 	    				</div>
 	    				<div class="col-md-9">
-	    					<span>[Vertical]</span>
-	    					<span>[Horizontal]</span>
+	    					<span data-direction="vertical">[Vertical]</span>
+	    					<span data-direction="horizontal">[Horizontal]</span>
 	    				</div>
 	    			</div>
 
@@ -82,7 +135,26 @@
 	    					<strong>Symbol:</strong>
 	    				</div>
 	    				<div class="col-md-9">
-	    					<span>SELECT Symbol</span>
+	    					<span data-symbol="select">[SELECT Symbol]</span>
+
+	    					<!-- Symbol Selection -->
+	    					<div id="symbol-selection">
+	    						<ul>
+	    							<li>
+	    								<h4>001</h4>
+	    								<img src="https://rockerswitchpros.com/wp-content/uploads/2015/01/0244.png" class="symbol" data-id="001">
+	    							</li>
+	    							<li>
+	    								<h4>002</h4>
+	    								<img src="https://rockerswitchpros.com/wp-content/uploads/2015/01/0129.png" class="symbol" data-id="002">
+	    							</li>
+	    							<li>
+	    								<h4>003</h4>
+	    								<img src="https://rockerswitchpros.com/wp-content/uploads/2015/01/0128.png" class="symbol" data-id="003">
+	    							</li>
+	    						</ul>
+	    					</div>
+
 	    				</div>
 	    			</div>
 
@@ -193,6 +265,83 @@
         	$(function() {
 
         		"use strict";
+
+
+
+
+        		/*
+        		* Listeners.
+        		*/
+
+        		var changeSymbol = function(src) {
+
+        			$("#symbol").attr("src", src);
+        			closeSymbolSelectionBox();
+
+        		};
+
+        		var closeSymbolSelectionBox = function() {
+
+        			$("#symbol-selection").fadeOut(250);
+
+        		};
+
+
+        		// Get user selected symbol.
+        		$("[data-id]").on("click", function() {
+
+        			changeSymbol($(this).attr("src"));
+
+        		});
+
+
+
+
+
+
+        		/*
+        		* Change switch direction.
+        		*/
+
+        		var changeViewDirection = function(direction) {
+        			
+        			// Switches view direction.
+        			$("#view").css({"background":"url("+'images/front-switch-'+direction+'.png'+") no-repeat"});
+
+        		};
+
+        		var changeElementPositionWidth = function(direction) {
+
+			    	if(direction == "vertical") {
+			    		$("#symbol").css({"top": 50 + "px", "left": 120 + "px", "width": 90 + "px"});
+			    		$("#text").css({"top": 150 + "px", "left": 95 + "px", "width": 100 + "px"});
+			    	} else {
+
+			    		$("#symbol").css({"top": 105 + "px", "left": 206 + "px", "width": 90 + "px"});
+			    		$("#text").css({"top": 130 + "px", "left": 95 + "px", "width": 100 + "px"});
+
+			    	}
+
+        		};
+
+        		// Direction for switch display
+        		$("[data-direction]").on("click", function() {
+
+        			changeViewDirection($(this).data("direction"));
+        			changeElementPositionWidth($(this).data("direction"));
+
+        		});
+
+
+        		// Open Symbol selection display
+        		$("[data-symbol]").on("click", function() {
+
+        			$("#symbol-selection").fadeIn(500);
+
+        		});
+
+
+
 
         		function addGoogleFont(FontName) { 
 			       // http://fonts.googleapis.com/css?family=Tangerine
